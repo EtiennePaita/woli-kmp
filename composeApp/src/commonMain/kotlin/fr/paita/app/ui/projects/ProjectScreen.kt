@@ -1,4 +1,4 @@
-package fr.paita.app.presentation.projects
+package fr.paita.app.ui.projects
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,9 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import fr.paita.app.theming.LightTextColorVariant
-import fr.paita.app.theming.Pink
-import fr.paita.app.theming.WoliTheme
+import fr.paita.app.ui.theme.LightTextColorVariant
+import fr.paita.app.ui.theme.Pink
+import fr.paita.app.ui.theme.WoliTheme
 
 
 @Composable

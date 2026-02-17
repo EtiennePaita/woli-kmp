@@ -6,7 +6,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import fr.paita.app.theming.WoliTheme
+import fr.paita.app.presentation.navigation.AppNavigation
+import fr.paita.app.ui.theme.WoliTheme
 
 @Composable
 fun App() {

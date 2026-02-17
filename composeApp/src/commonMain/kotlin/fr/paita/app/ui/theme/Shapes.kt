@@ -1,4 +1,4 @@
-package fr.paita.app.theming
+package fr.paita.app.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

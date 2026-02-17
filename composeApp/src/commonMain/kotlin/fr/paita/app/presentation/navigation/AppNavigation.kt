@@ -1,10 +1,10 @@
-package fr.paita.app
+package fr.paita.app.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import fr.paita.app.presentation.projects.ProjectScreen
+import fr.paita.app.ui.projects.ProjectScreen
 import kotlinx.serialization.Serializable
 
 @Serializable data object Projects

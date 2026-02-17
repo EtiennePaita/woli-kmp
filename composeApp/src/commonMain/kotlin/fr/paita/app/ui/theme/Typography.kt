@@ -1,4 +1,4 @@
-package fr.paita.app.theming
+package fr.paita.app.ui.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily

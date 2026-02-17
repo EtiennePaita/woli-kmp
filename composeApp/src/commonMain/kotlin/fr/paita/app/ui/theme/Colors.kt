@@ -1,4 +1,4 @@
-package fr.paita.app.theming
+package fr.paita.app.ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme

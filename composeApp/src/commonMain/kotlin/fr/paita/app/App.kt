@@ -5,14 +5,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import fr.paita.app.di.appModule
 import fr.paita.app.presentation.navigation.AppNavigation
 import fr.paita.app.ui.theme.WoliTheme
+import org.koin.compose.KoinApplication
 
 @Composable
-fun App() {
-    WoliTheme {
-        Surface (
+fun App() = WoliTheme {
+    KoinApplication(
+        application = {
+            modules(appModule)
+        }
+    ) {
+        Surface(
             modifier = Modifier
                 .fillMaxSize(),
             color = MaterialTheme.colorScheme.background
@@ -22,8 +27,10 @@ fun App() {
     }
 }
 
+/*
 @Preview
 @Composable
 fun App_Preview() {
     App()
 }
+ */

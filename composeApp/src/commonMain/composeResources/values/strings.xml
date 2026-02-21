@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- Projects screen -->
+    <string name="project_screen_title">Projects</string>
+    <string name="no_project">No Projects Yet</string>
+    <string name="no_project_subtitle">Start organizing your workflow by creating your first project folder</string>
+    <string name="create_new_project">Create new project</string>
+</resources>

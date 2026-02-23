@@ -1,4 +1,4 @@
-package fr.paita.app.ui.projects
+package fr.paita.app.ui.screens.projects
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,13 +20,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.paita.app.presentation.projects.ProjectAction
@@ -35,7 +33,6 @@ import fr.paita.app.presentation.projects.ProjectViewModel
 import fr.paita.app.ui.components.WoliLoader
 import fr.paita.app.ui.theme.LightTextColorVariant
 import fr.paita.app.ui.theme.Pink
-import fr.paita.app.ui.theme.WoliTheme
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import woli_kmp.composeapp.generated.resources.Res
@@ -82,7 +79,7 @@ fun ProjectScreen(
 
 
 @Composable
-private fun ProjectContent(
+internal fun ProjectContent(
     state: ProjectUiState
 ) {
 
@@ -104,7 +101,7 @@ private fun ProjectContent(
 }
 
 @Composable
-private fun ProjectEmptyState(
+internal fun ProjectEmptyState(
     onCreateNewProject: () -> Unit
 ) {
     Column(
@@ -154,32 +151,5 @@ private fun ProjectEmptyState(
             Text(stringResource(Res.string.create_new_project))
         }
 
-    }
-}
-
-
-
-@Preview
-@Composable
-private fun ProjectScreen_Preview() {
-    WoliTheme {
-        Surface {
-            ProjectScreen()
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun ProjectContent_Preview() {
-    ProjectContent(ProjectUiState())
-}
-
-
-@Preview
-@Composable
-private fun ProjectEmptyState_Preview() {
-    WoliTheme {
-        ProjectEmptyState {}
     }
 }

@@ -3,6 +3,7 @@ package fr.paita.app.presentation.projects
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.paita.app.domain.repository.TaskRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -46,11 +47,26 @@ class ProjectViewModel(
     }
 
     private fun onCompleteTaskAction(taskId: String) {
-        _state.update {
-            val updatedTasks = it.tasks?.map { task ->
-                if (task.id == taskId) task.copy(isCompleted = true) else task
+        viewModelScope.launch {
+            _state.update {
+                val updatedTasks = it.tasks?.map { task ->
+                    if (task.id == taskId) task.copy(isCompleted = true) else task
+                }
+                it.copy(tasks = updatedTasks)
             }
-            it.copy(tasks = updatedTasks)
+
+            delay(500)
+            removeTask(taskId)
+        }
+    }
+
+    private fun removeTask(taskId: String) {
+        _state.update {
+            it.copy(
+                tasks =  it.tasks?.filter { task ->
+                    task.id != taskId
+                }
+            )
         }
     }
 

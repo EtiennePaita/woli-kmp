@@ -14,14 +14,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Folder
-import androidx.compose.material.icons.filled.SmartToy
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -29,9 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.paita.app.domain.model.Task
 import fr.paita.app.presentation.projects.ProjectAction
-import fr.paita.app.presentation.projects.ProjectUiState
 import fr.paita.app.presentation.projects.ProjectViewModel
-import fr.paita.app.ui.components.TaskCheckBox
+import fr.paita.app.ui.components.TaskList
 import fr.paita.app.ui.components.WoliLoader
 import fr.paita.app.ui.theme.LightTextColorVariant
 import fr.paita.app.ui.theme.Pink
@@ -98,25 +95,11 @@ internal fun ProjectContent(
     onCheckedChanged: ((String, Boolean) -> Unit)
 ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        tasks.forEach { task ->
-            key(task.id) {
-                TaskCheckBox(
-                    task.isCompleted,
-                    { isChecked ->
-                        onCheckedChanged(task.id, isChecked)
-                    },
-                    task.title
-                )
-            }
-        }
-    }
+    TaskList(
+        tasks,
+        onCheckedChanged
+    )
+
 }
 
 @Composable

@@ -9,8 +9,8 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val appModule = module {
-    //single<TaskDataSource> { FakeTaskDataSource() }
-    single<TaskDataSource> { TaskDataSource() }
+    single<TaskDataSource> { FakeTaskDataSource() }
+    //single<TaskDataSource> { TaskDataSource() }
     single<TaskRepository> { TaskRepositoryImpl(get()) }
     viewModelOf(::ProjectViewModel)
 }

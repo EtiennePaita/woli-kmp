@@ -1,8 +1,12 @@
 package fr.paita.app.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 
 @Composable
@@ -15,6 +19,10 @@ fun WoliTheme(
         colorScheme = colors,
         typography = WiloTypography(),
         shapes = Shapes,
-        content = content,
+        content = {
+            Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+                content()
+            }
+        },
     )
 }

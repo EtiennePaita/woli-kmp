@@ -21,8 +21,10 @@ val LightTextColorVariant = Color(0xFF98a3b9)
 val PinkPrimaryAccentButton = Color(0xFFF091A3)
 val PinkSecondaryAccentButton = Color(0xFFEC608F)
 
+// Colors
 val LightPinkBg = Color(0xFFfef7f9)
 val Pink = Color(0xFFf6b9cc)
+val LightGraySurfaceBackground = Color(0xFFF8F5F5)
 
 internal val DarkColorScheme = darkColorScheme(
     primary = WhitePrimary,
@@ -36,7 +38,7 @@ internal val DarkColorScheme = darkColorScheme(
 
 internal val LightColorScheme = lightColorScheme(
     primary = DarkGrayPrimary,
-    background = LightBackground,
+    background = WhitePrimary,//LightBackground,
     onBackground = LightTextColor,
     surface = LightSurface,
     onSurface = DarkGrayPrimary,

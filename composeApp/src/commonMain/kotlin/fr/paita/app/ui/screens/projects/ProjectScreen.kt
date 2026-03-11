@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,14 +21,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import fr.paita.app.domain.model.Task
 import fr.paita.app.presentation.projects.ProjectAction
 import fr.paita.app.presentation.projects.ProjectUiState
 import fr.paita.app.presentation.projects.ProjectViewModel
+import fr.paita.app.ui.components.TaskCheckBox
 import fr.paita.app.ui.components.WoliLoader
 import fr.paita.app.ui.theme.LightTextColorVariant
 import fr.paita.app.ui.theme.Pink
@@ -51,25 +53,37 @@ fun ProjectScreen(
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .safeContentPadding(),
+            .fillMaxSize()
     ) {
-        Text(
-            text = stringResource(Res.string.project_screen_title),
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center
-        )
-
-
-        if (uiState.value.tasks.isNullOrEmpty()) {
-            ProjectEmptyState(
-                onCreateNewProject = {
-                    viewModel.onAction(ProjectAction.CreateTask)
-                }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .safeContentPadding(),
+        ) {
+            Text(
+                text = stringResource(Res.string.project_screen_title),
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center
             )
-        } else {
-            ProjectContent(uiState.value)
+
+            if (uiState.value.tasks.isNullOrEmpty()) {
+                ProjectEmptyState(
+                    onCreateNewProject = {
+                        viewModel.onAction(ProjectAction.CreateTask)
+                    }
+                )
+            } else {
+                ProjectContent(
+                    uiState.value.tasks!!,
+                    { taskId, isChecked ->
+                        viewModel.onAction(
+                            if (isChecked) ProjectAction.CompleteTask(taskId)
+                            else ProjectAction.UncompleteTask(taskId)
+                        )
+                    }
+                )
+            }
         }
 
         if (uiState.value.isLoading) WoliLoader()
@@ -80,21 +94,26 @@ fun ProjectScreen(
 
 @Composable
 internal fun ProjectContent(
-    state: ProjectUiState
+    tasks:  List<Task>,
+    onCheckedChanged: ((String, Boolean) -> Unit)
 ) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxWidth()
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Icon(Icons.Default.SmartToy, contentDescription = "c")
-        Spacer(Modifier.height(24.dp))
-
-        state.tasks?.forEach { t ->
-            Row {
-                Text(t.title)
+        tasks.forEach { task ->
+            key(task.id) {
+                TaskCheckBox(
+                    task.isCompleted,
+                    { isChecked ->
+                        onCheckedChanged(task.id, isChecked)
+                    },
+                    task.title
+                )
             }
         }
     }

@@ -21,6 +21,8 @@ class ProjectViewModel(
     fun onAction(action: ProjectAction) {
         when(action) {
             ProjectAction.CreateTask -> onCreateTaskAction()
+            is ProjectAction.CompleteTask -> onCompleteTaskAction(action.id)
+            is ProjectAction.UncompleteTask -> onUncompleteTaskAction(action.id)
         }
     }
 
@@ -41,5 +43,23 @@ class ProjectViewModel(
 
     private fun onCreateTaskAction() {
 
+    }
+
+    private fun onCompleteTaskAction(taskId: String) {
+        _state.update {
+            val updatedTasks = it.tasks?.map { task ->
+                if (task.id == taskId) task.copy(isCompleted = true) else task
+            }
+            it.copy(tasks = updatedTasks)
+        }
+    }
+
+    private fun onUncompleteTaskAction(taskId: String) {
+        _state.update {
+            val updatedTasks = it.tasks?.map { task ->
+                if (task.id == taskId) task.copy(isCompleted = false) else task
+            }
+            it.copy(tasks = updatedTasks)
+        }
     }
 }
